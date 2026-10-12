@@ -6,11 +6,16 @@ A physics-informed neural network (PINN) framework that integrates the Kolmogoro
 
 ```
 KAN-PINN/
-├── benchmarks/                    # Numerical benchmark test cases
-│   ├── 01_Benchmark_ADE_InstantaneousRelease.py    # Case 1: Instantaneous point source
-│   ├── 02_Benchmark_ADE_ContinuousRelease.py       # Case 2: Continuous release at constant rate
-│   ├── 03_Benchmark_ADE_FiniteTimeRelease.py        # Case 3: Finite-time release
-│   └── 04_Benchmark_ADE_NumericalReference.py       # Case 4: Numerical reference solution
+├── benchmarks/                    # Numerical benchmark & case study code
+│   ├── 01_Benchmark_ADE_InstantaneousRelease.py    # Case 1: ADE instantaneous release
+│   ├── 02_Benchmark_ADE_ContinuousRelease.py       # Case 2: ADE continuous release
+│   ├── 03_Benchmark_ADE_FiniteTimeRelease.py        # Case 3: ADE finite-time release
+│   ├── 04_Benchmark_ADE_NumericalReference.py       # Case 4: ADE numerical reference
+│   ├── 05_Benchmark_Coupled_KWE_ADE.ipynb           # Coupled KWE-ADE (Fig. 6 vs Fig. S4)
+│   ├── 05_Benchmark_Coupled_KWE_ADE.py              # Same as above (.py format)
+│   ├── 06_Benchmark_SVE_KinematicWave.py            # SVE kinematic wave (shock wave)
+│   ├── 07_CaseStudy_RealWorld_FloodRouting.ipynb    # Real-world flood (Fig. 13)
+│   └── 07_CaseStudy_RealWorld_FloodRouting.py       # Same as above (.py format)
 ├── kan/                           # KAN neural network implementation
 │   ├── __init__.py
 │   ├── KANLayer.py                # KAN layer with B-spline activations
@@ -89,16 +94,28 @@ python benchmarks/03_Benchmark_ADE_FiniteTimeRelease.py
 
 # Case 4: Numerical reference solution
 python benchmarks/04_Benchmark_ADE_NumericalReference.py
+
+# Case 5: Coupled KWE-ADE (Fig. 6 vs Fig. S4)
+python benchmarks/05_Benchmark_Coupled_KWE_ADE.py
+
+# Case 6: SVE kinematic wave (shock wave)
+python benchmarks/06_Benchmark_SVE_KinematicWave.py
+
+# Case 7: Real-world flood routing (Fig. 13)
+python benchmarks/07_CaseStudy_RealWorld_FloodRouting.py
 ```
 
 ### Benchmark Descriptions
 
-| Case | Release Type | Velocity | Dispersion | Analytical Solution |
-|------|-------------|----------|------------|---------------------|
-| 1 | Instantaneous | 1.0 | 1e-3 | Gaussian pulse |
-| 2 | Continuous | 2.16 | 0.054 | erfc-based |
-| 3 | Finite-time (tau=0.167) | 2.16 | 0.054 | erfc with superposition |
-| 4 | Numerical reference | 1.0 | 0.1/pi | .mat data file |
+| Case | Description | Equation | Manuscript Figure |
+|------|-------------|----------|-------------------|
+| 1 | ADE instantaneous release | ADE (Gaussian pulse) | - |
+| 2 | ADE continuous release | ADE (erfc-based) | - |
+| 3 | ADE finite-time release | ADE (erfc superposition) | - |
+| 4 | ADE numerical reference | ADE (.mat data) | - |
+| 5 | Coupled KWE-ADE | KWE + ADE | Fig. 6 vs Fig. S4 |
+| 6 | SVE kinematic wave | KWE (shock wave) | - |
+| 7 | Real-world flood routing | KWE + ADE (inverse) | Fig. 13 |
 
 ### Network Configurations
 
