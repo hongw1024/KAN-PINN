@@ -6,16 +6,13 @@ A physics-informed neural network (PINN) framework that integrates the Kolmogoro
 
 ```
 KAN-PINN/
-├── benchmarks/                    # Numerical benchmark & case study code
+├── benchmarks/                    # Numerical benchmark code
 │   ├── 01_Benchmark_ADE_InstantaneousRelease.py    # Case 1: ADE instantaneous release
 │   ├── 02_Benchmark_ADE_ContinuousRelease.py       # Case 2: ADE continuous release
 │   ├── 03_Benchmark_ADE_FiniteTimeRelease.py        # Case 3: ADE finite-time release
 │   ├── 04_Benchmark_ADE_NumericalReference.py       # Case 4: ADE numerical reference
-│   ├── 05_Benchmark_Coupled_KWE_ADE.ipynb           # Coupled KWE-ADE (Fig. 6 vs Fig. S4)
-│   ├── 05_Benchmark_Coupled_KWE_ADE.py              # Same as above (.py format)
-│   ├── 06_Benchmark_SVE_KinematicWave.py            # SVE kinematic wave (shock wave)
-│   ├── 07_CaseStudy_RealWorld_FloodRouting.ipynb    # Real-world flood (Fig. 13)
-│   └── 07_CaseStudy_RealWorld_FloodRouting.py       # Same as above (.py format)
+│   ├── 05_Benchmark_Coupled_KWE_ADE.ipynb           # Coupled KWE-ADE (with results)
+│   └── 05_Benchmark_Coupled_KWE_ADE.py              # Same as above (.py format)
 ├── kan/                           # KAN neural network implementation
 │   ├── __init__.py
 │   ├── KANLayer.py                # KAN layer with B-spline activations
@@ -35,6 +32,8 @@ KAN-PINN/
 ├── requirements.txt               # Python dependencies
 └── README.md
 ```
+
+> **Note:** Additional code for the SVE kinematic wave benchmark and real-world case studies will be released upon publication of the accompanying manuscript.
 
 ## Key Features
 
@@ -95,27 +94,19 @@ python benchmarks/03_Benchmark_ADE_FiniteTimeRelease.py
 # Case 4: Numerical reference solution
 python benchmarks/04_Benchmark_ADE_NumericalReference.py
 
-# Case 5: Coupled KWE-ADE (Fig. 6 vs Fig. S4)
+# Case 5: Coupled KWE-ADE
 python benchmarks/05_Benchmark_Coupled_KWE_ADE.py
-
-# Case 6: SVE kinematic wave (shock wave)
-python benchmarks/06_Benchmark_SVE_KinematicWave.py
-
-# Case 7: Real-world flood routing (Fig. 13)
-python benchmarks/07_CaseStudy_RealWorld_FloodRouting.py
 ```
 
 ### Benchmark Descriptions
 
-| Case | Description | Equation | Manuscript Figure |
-|------|-------------|----------|-------------------|
-| 1 | ADE instantaneous release | ADE (Gaussian pulse) | - |
-| 2 | ADE continuous release | ADE (erfc-based) | - |
-| 3 | ADE finite-time release | ADE (erfc superposition) | - |
-| 4 | ADE numerical reference | ADE (.mat data) | - |
-| 5 | Coupled KWE-ADE | KWE + ADE | Fig. 6 vs Fig. S4 |
-| 6 | SVE kinematic wave | KWE (shock wave) | - |
-| 7 | Real-world flood routing | KWE + ADE (inverse) | Fig. 13 |
+| Case | Description | Equation | Analytical Solution |
+|------|-------------|----------|---------------------|
+| 1 | ADE instantaneous release | ADE (Gaussian pulse) | mp / (2*sqrt(pi*D*t)) * exp(...) |
+| 2 | ADE continuous release | ADE (erfc-based) | c0/2 * [exp(...) * erfc(...)] |
+| 3 | ADE finite-time release | ADE (erfc superposition) | Piecewise erfc solution |
+| 4 | ADE numerical reference | ADE (.mat data) | Numerical reference |
+| 5 | Coupled KWE-ADE | KWE + ADE | Finite difference reference |
 
 ### Network Configurations
 
