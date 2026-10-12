@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+*.mat
+*.png
+*.pdf
+CASE*/
+Results/
+data/
+model/
